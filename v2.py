@@ -9,18 +9,18 @@ data = pl.read_csv('data/prices.csv')
 music = music.filter(pl.col('chart') == 'top200')
 music = music.drop(['artist', 'chart', 'rank', 'url'])
 
-music = music.group_by('title').agg(pl.col('streams').sum().alias('total')).sort('total', descending=True).head(K)
+T = music.group_by('title').agg(pl.col('streams').sum().alias('total')).sort('total', descending=True).head(K)
+# print(T)
+
+titles = T['title']
+
+music = music.filter(pl.col('title').is_in(titles))
+# print(music)
+
+music = music.with_columns(pl.col('streams').sum().over('title', 'date').alias('S'))
+music = music.unique(['title', 'date'])
 print(music)
 
-titles = music['title']
-
-# music = music.filter(pl.col('title').count().over('title') >= 3000)
-music = music.filter(pl.col('title').count().over('title') >= 3000)
-# music = music.with_columns(pl.col('title').cast(pl.Categorical).to_physical())
-
-music = music.with_columns(pl.col('streams').sum().over('date').alias('S'))
-
-music = music.unique('date')
 
 # print(music)
 # print(music['title'].max())
