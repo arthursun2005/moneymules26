@@ -8,7 +8,7 @@ from PIL import Image
 from glob import glob
 import matplotlib.pyplot as plt
 
-loaded_npz = np.load('pp.npz')
+loaded_npz = np.load('params.npz')
 params = {k: jnp.array(loaded_npz[k]) for k in loaded_npz.files}
 
 IMG_SIZE = 3600
@@ -20,7 +20,6 @@ def rpool(x):
     x = x[:, :, None, :, None, :]
     x = jnp.tile(x, (1, 1, 2, 1, 2, 1))
     return x.reshape(x.shape[0], a * 2, b * 2, x.shape[-1])
-
 
 @jax.jit
 def eye(key, params, x, *, training):
@@ -47,11 +46,11 @@ def eye(key, params, x, *, training):
         x = x @ W3 / W3.shape[0] ** 0.5
         x = act(x + b3)
 
-        # x = x @ W4 / W4.shape[0] ** 0.5
-        # x = act(x + b4)
-        #
-        # x = x @ W5 / W5.shape[0] ** 0.5
-        # x = act(x + b5)
+        x = x @ W4 / W4.shape[0] ** 0.5
+        x = act(x + b4)
+
+        x = x @ W5 / W5.shape[0] ** 0.5
+        x = act(x + b5)
 
         # x = x @ W6 / W6.shape[0] ** 0.5
         # x = act(x + b6)
