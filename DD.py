@@ -310,6 +310,93 @@ T = (BS, 225, 225)
 #     3
 # )
 #
+# X = np.concatenate(
+#     [
+#         np.broadcast_to(np.cos(xx)[None, :, :, None], T + (1,)),
+#         np.broadcast_to(np.cos(yy)[None, :, :, None], T + (1,)),
+#         np.broadcast_to(np.cos(xx / 0.5)[None, :, :, None], T + (1,)),
+#         np.broadcast_to(np.cos(yy / 0.5)[None, :, :, None], T + (1,)),
+#         np.broadcast_to(np.cos(xx / 0.2)[None, :, :, None], T + (1,)),
+#         np.broadcast_to(np.cos(yy / 0.2)[None, :, :, None], T + (1,)),
+#         np.broadcast_to(X[:, None, None, :], T + (2,)),
+#
+#         np.broadcast_to(np.cos(xx)[None, :, :, None], T + (1,)),
+#         np.broadcast_to(np.cos(yy)[None, :, :, None], T + (1,)),
+#         np.broadcast_to(np.cos(xx / 0.1)[None, :, :, None], T + (1,)),
+#         np.broadcast_to(np.cos(yy / 0.1)[None, :, :, None], T + (1,)),
+#         np.broadcast_to(np.cos(xx / 0.05)[None, :, :, None], T + (1,)),
+#         np.broadcast_to(np.cos(yy / 0.05)[None, :, :, None], T + (1,)),
+#         np.broadcast_to(X[:, None, None, :], T + (2,)),
+#
+#         # np.broadcast_to(np.cos(xx)[None, :, :, None], T + (1,)),
+#         # np.broadcast_to(np.cos(yy)[None, :, :, None], T + (1,)),
+#         # np.broadcast_to(np.cos(xx / 0.05)[None, :, :, None], T + (1,)),
+#         # np.broadcast_to(np.cos(yy / 0.05)[None, :, :, None], T + (1,)),
+#         # np.broadcast_to(np.cos(xx / 0.02)[None, :, :, None], T + (1,)),
+#         # np.broadcast_to(np.cos(yy / 0.02)[None, :, :, None], T + (1,)),
+#         # np.broadcast_to(X[:, None, None, :], T + (2,)),
+#         #
+#         # np.broadcast_to(np.cos(xx)[None, :, :, None], T + (1,)),
+#         # np.broadcast_to(np.cos(yy)[None, :, :, None], T + (1,)),
+#         # np.broadcast_to(np.cos(xx * 0.5)[None, :, :, None], T + (1,)),
+#         # np.broadcast_to(np.cos(yy * 0.5)[None, :, :, None], T + (1,)),
+#         # np.broadcast_to(np.cos(xx * 0.2)[None, :, :, None], T + (1,)),
+#         # np.broadcast_to(np.cos(yy * 0.2)[None, :, :, None], T + (1,)),
+#         # np.broadcast_to(X[:, None, None, :], T + (2,)),
+#
+#         np.broadcast_to(X[:, None, None, :], T + (2,)),
+#         np.broadcast_to(X[:, None, None, :], T + (2,)),
+#         np.broadcast_to(X[:, None, None, :], T + (2,)),
+#         np.broadcast_to(X[:, None, None, :], T + (2,)),
+#
+#         np.broadcast_to(X[:, None, None, :], T + (2,)),
+#         np.broadcast_to(X[:, None, None, :], T + (2,)),
+#         np.broadcast_to(X[:, None, None, :], T + (2,)),
+#         np.broadcast_to(X[:, None, None, :], T + (2,)),
+#
+#         np.broadcast_to(np.cos(xx)[None, :, :, None], T + (1,)),
+#         np.broadcast_to(np.cos(yy)[None, :, :, None], T + (1,)),
+#         np.broadcast_to(np.cos(xx / 0.03)[None, :, :, None], T + (1,)),
+#         np.broadcast_to(np.cos(yy / 0.03)[None, :, :, None], T + (1,)),
+#         np.broadcast_to(np.cos(xx / 0.02)[None, :, :, None], T + (1,)),
+#         np.broadcast_to(np.cos(yy / 0.01)[None, :, :, None], T + (1,)),
+#         np.broadcast_to(X[:, None, None, :], T + (2,)),
+#
+#         # np.broadcast_to(np.cos(xx)[None, :, :, None], T + (1,)),
+#         # np.broadcast_to(np.cos(yy)[None, :, :, None], T + (1,)),
+#         # np.broadcast_to(np.cos(xx / 0.15)[None, :, :, None], T + (1,)),
+#         # np.broadcast_to(np.cos(yy / 0.15)[None, :, :, None], T + (1,)),
+#         # np.broadcast_to(np.cos(xx / 0.12)[None, :, :, None], T + (1,)),
+#         # np.broadcast_to(np.cos(yy / 0.12)[None, :, :, None], T + (1,)),
+#         # np.broadcast_to(X[:, None, None, :], T + (2,)),
+#
+#         np.broadcast_to(np.cos(xx)[None, :, :, None], T + (1,)),
+#         np.broadcast_to(np.cos(yy)[None, :, :, None], T + (1,)),
+#         np.broadcast_to(np.cos(xx / 0.01)[None, :, :, None], T + (1,)),
+#         np.broadcast_to(np.cos(yy / 0.01)[None, :, :, None], T + (1,)),
+#         np.broadcast_to(np.cos(xx / 0.005)[None, :, :, None], T + (1,)),
+#         np.broadcast_to(np.cos(yy / 0.005)[None, :, :, None], T + (1,)),
+#         np.broadcast_to(X[:, None, None, :], T + (2,)),
+#
+#         np.broadcast_to(X[:, None, None, :], T + (2,)),
+#         np.broadcast_to(X[:, None, None, :], T + (2,)),
+#         np.broadcast_to(X[:, None, None, :], T + (2,)),
+#         np.broadcast_to(X[:, None, None, :], T + (2,)),
+#
+#         # np.broadcast_to(np.cos(xx / IMG_SIZE)[None, :, :, None], T + (1,)),
+#         # np.broadcast_to(np.cos(yy / IMG_SIZE)[None, :, :, None], T + (1,)),
+#         # np.broadcast_to(np.cos(xx / IMG_SIZE * 0.5)[None, :, :, None], T + (1,)),
+#         # np.broadcast_to(np.cos(yy / IMG_SIZE * 0.5)[None, :, :, None], T + (1,)),
+#         # np.broadcast_to(np.cos(xx / IMG_SIZE * 0.2)[None, :, :, None], T + (1,)),
+#         # np.broadcast_to(np.cos(yy / IMG_SIZE * 0.2)[None, :, :, None], T + (1,)),
+#
+#         np.broadcast_to(X[:, None, None, :], T + (2,)),
+#         np.broadcast_to(X[:, None, None, :], T + (2,)),
+#         np.broadcast_to(X[:, None, None, :], T + (2,)),
+#         np.broadcast_to(X[:, None, None, :], T + (2,)),
+#     ],
+#     3
+# )
 X = np.concatenate(
     [
         np.broadcast_to(np.cos(xx)[None, :, :, None], T + (1,)),
@@ -344,10 +431,10 @@ X = np.concatenate(
         # np.broadcast_to(np.cos(yy * 0.2)[None, :, :, None], T + (1,)),
         # np.broadcast_to(X[:, None, None, :], T + (2,)),
 
-        np.broadcast_to(X[:, None, None, :], T + (2,)),
-        np.broadcast_to(X[:, None, None, :], T + (2,)),
-        np.broadcast_to(X[:, None, None, :], T + (2,)),
-        np.broadcast_to(X[:, None, None, :], T + (2,)),
+        # np.broadcast_to(X[:, None, None, :], T + (2,)),
+        # np.broadcast_to(X[:, None, None, :], T + (2,)),
+        # np.broadcast_to(X[:, None, None, :], T + (2,)),
+        # np.broadcast_to(X[:, None, None, :], T + (2,)),
 
         np.broadcast_to(X[:, None, None, :], T + (2,)),
         np.broadcast_to(X[:, None, None, :], T + (2,)),
@@ -359,7 +446,15 @@ X = np.concatenate(
         np.broadcast_to(np.cos(xx / 0.03)[None, :, :, None], T + (1,)),
         np.broadcast_to(np.cos(yy / 0.03)[None, :, :, None], T + (1,)),
         np.broadcast_to(np.cos(xx / 0.02)[None, :, :, None], T + (1,)),
-        np.broadcast_to(np.cos(yy / 0.01)[None, :, :, None], T + (1,)),
+        np.broadcast_to(np.cos(yy / 0.02)[None, :, :, None], T + (1,)),
+        np.broadcast_to(X[:, None, None, :], T + (2,)),
+
+        np.broadcast_to(np.cos(xx * 2)[None, :, :, None], T + (1,)),
+        np.broadcast_to(np.cos(yy * 2)[None, :, :, None], T + (1,)),
+        np.broadcast_to(np.cos(xx / 0.002)[None, :, :, None], T + (1,)),
+        np.broadcast_to(np.cos(yy / 0.002)[None, :, :, None], T + (1,)),
+        np.broadcast_to(np.cos(xx / 0.001)[None, :, :, None], T + (1,)),
+        np.broadcast_to(np.cos(yy / 0.001)[None, :, :, None], T + (1,)),
         np.broadcast_to(X[:, None, None, :], T + (2,)),
 
         # np.broadcast_to(np.cos(xx)[None, :, :, None], T + (1,)),
@@ -402,8 +497,8 @@ key = jax.random.PRNGKey(0)
 P = eye(key, params, X, training=True)
 
 print(P.shape)
-print(P * 1e4)
-print(img)
+# print(P * 1e3)
+# print(img)
 
 # P = np.maximum(0, np.array(P)[0, 0, :, :])
 P = np.array(P)[0, 0, :, :]

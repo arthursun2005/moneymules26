@@ -111,7 +111,7 @@ def eye(key, params, x, *, training):
                                                 dimension_numbers=('NHWC', 'OIHW', 'NHWC')) / (w.shape[1] * w.shape[2] * w.shape[3]) ** 0.5
 
 
-        act = jax.nn.swish
+        act = jax.nn.selu
 
         x = x @ W1 / W1.shape[0] ** 0.5
         x = act(x + b1)
@@ -223,7 +223,8 @@ def train_once(key, params, opt_state, x, y):
         # return err.mean() ** 0.5
         # err = jnp.abs(p - y[None, :])
         # return err.mean()
-        err = jnp.log1p(jnp.abs(p - y[None, :]))
+        # err = jnp.log1p(jnp.abs(p - y[None, :]))
+        err = jnp.abs(p - y[None, :])
         return err.mean()
     loss, grads = jax.value_and_grad(compute)(params)
     updates, opt_state = opt.update(grads, opt_state, params)
@@ -293,10 +294,10 @@ for k in (bar := tqdm(range(steps))):
                 # np.broadcast_to(np.cos(yy * 0.2)[None, :, :, None], T + (1,)),
                 # np.broadcast_to(X[:, None, None, :], T + (2,)),
 
-                np.broadcast_to(X[:, None, None, :], T + (2,)),
-                np.broadcast_to(X[:, None, None, :], T + (2,)),
-                np.broadcast_to(X[:, None, None, :], T + (2,)),
-                np.broadcast_to(X[:, None, None, :], T + (2,)),
+                # np.broadcast_to(X[:, None, None, :], T + (2,)),
+                # np.broadcast_to(X[:, None, None, :], T + (2,)),
+                # np.broadcast_to(X[:, None, None, :], T + (2,)),
+                # np.broadcast_to(X[:, None, None, :], T + (2,)),
 
                 np.broadcast_to(X[:, None, None, :], T + (2,)),
                 np.broadcast_to(X[:, None, None, :], T + (2,)),
@@ -308,7 +309,15 @@ for k in (bar := tqdm(range(steps))):
                 np.broadcast_to(np.cos(xx / 0.03)[None, :, :, None], T + (1,)),
                 np.broadcast_to(np.cos(yy / 0.03)[None, :, :, None], T + (1,)),
                 np.broadcast_to(np.cos(xx / 0.02)[None, :, :, None], T + (1,)),
-                np.broadcast_to(np.cos(yy / 0.01)[None, :, :, None], T + (1,)),
+                np.broadcast_to(np.cos(yy / 0.02)[None, :, :, None], T + (1,)),
+                np.broadcast_to(X[:, None, None, :], T + (2,)),
+
+                np.broadcast_to(np.cos(xx * 2)[None, :, :, None], T + (1,)),
+                np.broadcast_to(np.cos(yy * 2)[None, :, :, None], T + (1,)),
+                np.broadcast_to(np.cos(xx / 0.002)[None, :, :, None], T + (1,)),
+                np.broadcast_to(np.cos(yy / 0.002)[None, :, :, None], T + (1,)),
+                np.broadcast_to(np.cos(xx / 0.001)[None, :, :, None], T + (1,)),
+                np.broadcast_to(np.cos(yy / 0.001)[None, :, :, None], T + (1,)),
                 np.broadcast_to(X[:, None, None, :], T + (2,)),
 
                 # np.broadcast_to(np.cos(xx)[None, :, :, None], T + (1,)),
