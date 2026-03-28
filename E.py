@@ -1,5 +1,5 @@
-import os
-os.environ['JAX_PLATFORM_NAME'] = 'cpu'
+# import os
+# os.environ['JAX_PLATFORM_NAME'] = 'cpu'
 
 import numpy as np
 import jax
@@ -40,7 +40,7 @@ def eye_make_params(key, n_out, *, k):
     def conv(key, shape):
         return jax.random.normal(key, (shape[0], shape[1], shape[1], shape[2], shape[3]))
 
-    W, H = 7, 7
+    W, H = 3, 3
     M = [16, 32, 32, 64]
     AA = 64
     BB = 16
@@ -107,7 +107,7 @@ def eye(key, params, x, *, training):
 
         def rconv(x, w):
             return jax.lax.conv_general_dilated(x, w, (1, 1),
-                                                 padding=[(3, 3), (3, 3)],
+                                                 padding=[(1, 1), (1, 1)],
                                                 dimension_numbers=('NHWC', 'OIHW', 'NHWC')) / (w.shape[1] * w.shape[2] * w.shape[3]) ** 0.5
 
 
@@ -235,7 +235,7 @@ BS = 1
 BB = 1
 key = jax.random.PRNGKey(1)
 key, params = eye_make_params(key, 1, k=1)
-steps = 256
+steps = 512
 # opt = optax.adabelief(optax.cosine_onecycle_schedule(steps, 1e-2, 0.1), b1=0.95, b2=0.99)
 # opt = optax.contrib.adopt(optax.cosine_onecycle_schedule(steps, 1e-3, 0.1), b1=0.67, b2=0.99)
 opt = optax.contrib.adopt(optax.cosine_onecycle_schedule(steps, 1e-2, 0.1), b1=0.67, b2=0.99)
@@ -299,10 +299,10 @@ for k in (bar := tqdm(range(steps))):
                 # np.broadcast_to(X[:, None, None, :], T + (2,)),
                 # np.broadcast_to(X[:, None, None, :], T + (2,)),
 
-                np.broadcast_to(X[:, None, None, :], T + (2,)),
-                np.broadcast_to(X[:, None, None, :], T + (2,)),
-                np.broadcast_to(X[:, None, None, :], T + (2,)),
-                np.broadcast_to(X[:, None, None, :], T + (2,)),
+                # np.broadcast_to(X[:, None, None, :], T + (2,)),
+                # np.broadcast_to(X[:, None, None, :], T + (2,)),
+                # np.broadcast_to(X[:, None, None, :], T + (2,)),
+                # np.broadcast_to(X[:, None, None, :], T + (2,)),
 
                 np.broadcast_to(np.cos(xx)[None, :, :, None], T + (1,)),
                 np.broadcast_to(np.cos(yy)[None, :, :, None], T + (1,)),
@@ -310,6 +310,14 @@ for k in (bar := tqdm(range(steps))):
                 np.broadcast_to(np.cos(yy / 0.03)[None, :, :, None], T + (1,)),
                 np.broadcast_to(np.cos(xx / 0.02)[None, :, :, None], T + (1,)),
                 np.broadcast_to(np.cos(yy / 0.02)[None, :, :, None], T + (1,)),
+                np.broadcast_to(X[:, None, None, :], T + (2,)),
+
+                np.broadcast_to(np.cos(xx * 1.2)[None, :, :, None], T + (1,)),
+                np.broadcast_to(np.cos(yy * 1.2)[None, :, :, None], T + (1,)),
+                np.broadcast_to(np.cos(xx * 1.3)[None, :, :, None], T + (1,)),
+                np.broadcast_to(np.cos(yy * 1.3)[None, :, :, None], T + (1,)),
+                np.broadcast_to(np.cos(xx * 0.9)[None, :, :, None], T + (1,)),
+                np.broadcast_to(np.cos(yy * 0.9)[None, :, :, None], T + (1,)),
                 np.broadcast_to(X[:, None, None, :], T + (2,)),
 
                 np.broadcast_to(np.cos(xx * 2)[None, :, :, None], T + (1,)),
