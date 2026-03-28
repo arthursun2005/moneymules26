@@ -1,4 +1,3 @@
-import polars as pl
 import yfinance as yf
 
 sector_tickers = [
@@ -6,10 +5,12 @@ sector_tickers = [
     'XLP', 'XLU', 'XLB', 'XLRE', 'XLC'
 ]
 
+sector_tickers = ['SPY']
+
 data = yf.download(
     sector_tickers,
     start='2017-01-01',
-    end='2021-07-31',
+    end='2021-12-31',
     group_by='ticker',
     auto_adjust=True
 )
