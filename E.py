@@ -221,7 +221,9 @@ def train_once(key, params, opt_state, x, y):
         p = eye(subkey, params, x, training=True)
         # err = (p - y[None, :]) ** 2
         # return err.mean() ** 0.5
-        err = jnp.abs(p - y[None, :])
+        # err = jnp.abs(p - y[None, :])
+        # return err.mean()
+        err = jnp.log1p(jnp.abs(p - y[None, :]))
         return err.mean()
     loss, grads = jax.value_and_grad(compute)(params)
     updates, opt_state = opt.update(grads, opt_state, params)
@@ -245,7 +247,8 @@ for k in (bar := tqdm(range(steps))):
         idx = random.choices(paths, k=BS * BB)
         images = np.array([
             np.array(Image.open(p))[:IMG_SIZE, :IMG_SIZE] for p in idx
-        ], dtype=np.float32) / 1e4
+        ], dtype=np.float32) / 2e1
+        images -= images.mean()
         assert images.shape == (BS * BB, IMG_SIZE, IMG_SIZE)
         X = np.array([
             make_x(p) for p in idx
@@ -355,7 +358,7 @@ for k in (bar := tqdm(range(steps))):
         # p = eye(key, params, U, training=True)
         # print(p)
 
-        print(ema_loss.get() * 1e4)
+        print(ema_loss.get() * 2e1)
 
         gc.collect()
 
