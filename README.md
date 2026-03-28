@@ -15,4 +15,4 @@ Use `python predict.py` to run the predicter.
 ## Comparison of input and prediction from CNN
 
 ![Input to CNN](input.jpeg)
-![Prediction from CNN](predicted.jpeg)
+![Prediction from CNN](predicted2.jpeg)
