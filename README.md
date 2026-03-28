@@ -1,8 +1,6 @@
 # It's a Small World
 
-Terrain-Aware compression via Content Mixing
-
-![An example terrain our program can compress](thumbnail.png)
+### Terrain-Aware compression via Content Mixing
 
 ## CNN Compression
 
@@ -13,3 +11,8 @@ We used fourier features as input to a convolutional neural network for compress
 `python train.py` to run the trainer. You will need to have the jax ecosystem installed on your python environment.
 
 Use `python predict.py` to run the predicter.
+
+## Comparison of input and prediction from CNN
+
+![Input to CNN](input.jpeg)
+![Prediction from CNN](predicted.jpeg)
