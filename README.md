@@ -1,6 +1,6 @@
 # It's a Small World
 
-This project is focused on compressing GDEM data.
+Terrain-Aware compression via Content Mixing
 
 ## CNN Compression
 
