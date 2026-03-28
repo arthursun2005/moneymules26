@@ -2,7 +2,7 @@
 
 Terrain-Aware compression via Content Mixing
 
-![An example terrain our program can compress](./images/screenshot.png)
+![An example terrain our program can compress](thumbnail.png)
 
 ## CNN Compression
 
