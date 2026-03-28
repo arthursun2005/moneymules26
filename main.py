@@ -1,3 +1,4 @@
+from tqdm import tqdm
 import polars as pl
 import numpy as np
 
@@ -22,3 +23,12 @@ Y = np.concat([np.diff(data['XLU_Close'].to_numpy()), [0]])
 print(Y.shape, len(dates))
 
 X = []
+
+for d in tqdm(dates):
+    v = music.filter(pl.col('date') == d)['S'].to_list()
+    if len(v) > 0:
+        X.append(v[0])
+    else:
+        X.append(0)
+X = np.array(X)
+print(X.shape)
