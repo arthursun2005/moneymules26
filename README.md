@@ -1,6 +1,6 @@
 # It's a Small World
 
-Terrain-Aware compression via Content Mixing
+### Terrain-Aware compression via Content Mixing
 
 ## CNN Compression
 
