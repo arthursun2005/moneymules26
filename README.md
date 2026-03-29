@@ -1,4 +1,4 @@
-# It's a Small World
+# It's a Small World!
 
 ### Terrain-Aware compression via Content Mixing
 
