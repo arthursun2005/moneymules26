@@ -1,4 +1,4 @@
-# It's a Small World! - our submission to Quantihack 2026
+# It's a Small World! - Quantihack 2026
 
 ### Terrain-Aware compression via Content Mixing
 
